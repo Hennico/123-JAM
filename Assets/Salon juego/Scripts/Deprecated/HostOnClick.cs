@@ -7,7 +7,7 @@ public class HostOnClick : MonoBehaviour
 
     public void Host()
     {
-
-        NetworkManager.singleton.StartHost();
+        NetworkLobbyManager.singleton.StartHost();
+        //NetworkManager.singleton.StartHost();
     }
 }

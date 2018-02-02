@@ -7,6 +7,7 @@ public class JoinOnClick : MonoBehaviour
 
     public void Join()
     {
-        NetworkManager.singleton.StartClient();
+        NetworkLobbyManager.singleton.StartClient();
+        //NetworkManager.singleton.StartClient();
     }
 }
