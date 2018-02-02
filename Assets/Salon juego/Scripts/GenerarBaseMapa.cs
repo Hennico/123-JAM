@@ -18,8 +18,9 @@ public class GenerarBaseMapa : NetworkBehaviour {
     public float xoffset = -1.0f;
     public float yoffset = -1.0f;
 
-    public GameObject tubo;
     public GameObject piso;
+    public GameObject tuboFijo;
+    public GameObject tuboMovil;
 
     // Use this for initialization
     void Start()
@@ -182,14 +183,12 @@ public class GenerarBaseMapa : NetworkBehaviour {
             {
                 if (plano[xx, yy] == Celda.tubo || plano[xx,yy] == Celda.tuboSuelto)
                 {
-                    GameObject tuboIns = Instantiate(tubo, new Vector3(xoffset + xx, yoffset + yy, 0.5f), Quaternion.identity);
+                    GameObject tuboSelec = plano[xx, yy] == Celda.tubo ? tuboFijo : tuboMovil;
+                    GameObject tuboIns = Instantiate(tuboSelec, new Vector3(xoffset + xx, yoffset + yy, 0.5f), Quaternion.identity);
                     tuboIns.transform.parent = transform;
                     
                     tuboIns.GetComponent<UpdateTiles>().codigoImagen = imagenCodigo[xx, yy];
-
-                    if (plano[xx, yy] == Celda.tubo)
-                        Destroy(tuboIns.GetComponent<PegarsePersonaje>());
-
+                    
                     NetworkServer.Spawn(tuboIns);
                 }
 
