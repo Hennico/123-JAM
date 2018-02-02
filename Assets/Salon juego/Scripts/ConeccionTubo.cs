@@ -11,23 +11,25 @@ public class ConeccionTubo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D theCollision)
     {
-        if (theCollision.gameObject.tag == "Tubo")
-            conectado = true;
-
         if (theCollision.gameObject.tag == "Player")
         {
             personajeAlLado = true;
             personajeAdjacente = theCollision.GetComponent<MovimientoPersonaje>();
+            conectado = personajeAdjacente.quieto;
         }
     }
-    
+
+    private void Update()
+    {
+        if (personajeAlLado && !conectado)
+            conectado = personajeAdjacente.quieto;
+    }
+
     void OnTriggerExit2D(Collider2D theCollision)
     {
-        if (theCollision.gameObject.tag == "Tubo")
-            conectado = false;
-
         if (theCollision.gameObject.tag == "Player")
         {
+            conectado = false;
             personajeAlLado = false;
             personajeAdjacente = null;
         }

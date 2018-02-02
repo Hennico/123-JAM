@@ -8,6 +8,5 @@ public class DisconnectOnClick : MonoBehaviour
     public void Disconnect()
     {
         NetworkLobbyManager.singleton.StopHost();
-   
     }
 }

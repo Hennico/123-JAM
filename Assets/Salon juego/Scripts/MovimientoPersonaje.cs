@@ -9,6 +9,7 @@ public class MovimientoPersonaje : NetworkBehaviour {
 
     public Vector2 bordeIzquierdaAbajo;
     public Vector2 bordeDerechaArriba;
+    public LayerMask obstaculos;
 
     private Animator anim;
     
@@ -82,10 +83,14 @@ public class MovimientoPersonaje : NetworkBehaviour {
     [ClientRpc]
     private void RpcAvanzar(Vector3 direccion)
     {
-        var xValido = (posicionDestino.x + direccion.x) < bordeDerechaArriba.x && (posicionDestino.x + direccion.x) > bordeIzquierdaAbajo.x;
-        var yValido = (posicionDestino.y + direccion.y) < bordeDerechaArriba.y && (posicionDestino.y + direccion.y) > bordeIzquierdaAbajo.y;
+        //Vector2 newPosition = posicionDestino + direccion;
+        bool bloqueado = false;// Physics2D.OverlapCircle(newPosition, .1f, obstaculos);
 
-        if (xValido && yValido)
+        bool xValido = (posicionDestino.x + direccion.x) < bordeDerechaArriba.x && (posicionDestino.x + direccion.x) > bordeIzquierdaAbajo.x;
+        bool yValido = (posicionDestino.y + direccion.y) < bordeDerechaArriba.y && (posicionDestino.y + direccion.y) > bordeIzquierdaAbajo.y;
+
+
+        if (xValido && yValido && !bloqueado)
             posicionDestino += direccion;
     }
 }

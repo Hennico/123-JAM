@@ -18,6 +18,11 @@ public class ReadyButton : MonoBehaviour
             if (player.isLocalPlayer)
             {
                 player.readyToBegin = !player.readyToBegin;
+
+                if (player.readyToBegin)
+                    player.SendReadyToBeginMessage();
+                else player.SendNotReadyToBeginMessage();
+
                 ReadyColor(player.readyToBegin);
             }
         }
