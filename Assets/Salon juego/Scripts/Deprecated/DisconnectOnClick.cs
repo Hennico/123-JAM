@@ -7,7 +7,7 @@ public class DisconnectOnClick : MonoBehaviour
 
     public void Disconnect()
     {
-        NetworkManager.singleton.StopClient();
+        NetworkLobbyManager.singleton.StopHost();
    
     }
 }
